@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Test from './Test'
 
-import TickControl from './TickControl.js'
-
-ReactDOM.render(<TickControl />, document.getElementById("root"))
+ReactDOM.render(<Test /> , document.getElementById("root"))
