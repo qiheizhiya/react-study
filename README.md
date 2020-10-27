@@ -1,18 +1,32 @@
-# 深入认识setState
+## 旧版生命周期
 
-setState，它对状态的改变，**可能**是异步的
+React < 16.0.0
 
-> 如果改变状态的代码处于某个HTML元素的事件中，则其是异步的，否则是同步
-
-如果遇到某个事件中，需要同步调用多次，需要使用函数的方式得到最新状态
-
-
-最佳实践：
-
-1. 把所有的setState当作是异步的
-2. 永远不要信任setState调用之后的状态
-3. 如果要使用改变之后的状态，需要使用回调函数（setState的第二个参数）
-4. 如果新的状态要根据之前的状态进行运算，使用函数的方式改变状态（setState的第一个函数）
-
-
-React会对异步的setState进行优化，将多次setState进行合并（将多次状态改变完成后，再统一对state进行改变，然后触发render）
+1. constructor
+   1. 同一个组件对象只会创建一次
+   2. 不能在第一次挂载到页面之前，调用setState，为了避免问题，构造函数中严禁使用setState
+2. componentWillMount
+   1. 正常情况下，和构造函数一样，它只会运行一次
+   2. 可以使用setState，但是为了避免bug，不允许使用，因为在某些特殊情况下，该函数可能被调用多次
+3. **render**
+   1. 返回一个虚拟DOM，会被挂载到虚拟DOM树中，最终渲染到页面的真实DOM中
+   2. render可能不只运行一次，只要需要重新渲染，就会重新运行
+   3. 严禁使用setState，因为可能会导致无限递归渲染
+4. **componentDidMount**
+   1. 只会执行一次
+   2. 可以使用setState
+   3. 通常情况下，会将网络请求、启动计时器等一开始需要的操作，书写到该函数中
+5. 组件进入活跃状态
+6. componentWillReceiveProps
+   1. 即将接收新的属性值
+   2. 参数为新的属性对象
+   3. 该函数可能会导致一些bug，所以不推荐使用
+7. **shouldComponentUpdate**
+   1. 指示React是否要重新渲染该组件，通过返回true和false来指定
+   2. 默认情况下，会直接返回true
+8. componentWillUpdate
+   1. 组件即将被重新渲染
+9. componentDidUpdate
+   1.  往往在该函数中使用dom操作，改变元素
+10. **componentWillUnmount**
+    1.  通常在该函数中销毁一些组件依赖的资源，比如计时器
