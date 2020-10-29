@@ -1,4 +1,4 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FormTest from './components/FormTest'
-ReactDOM.render(<FormTest></FormTest> , document.getElementById("root"))
+import App from './App'
+ReactDOM.render(<App></App> , document.getElementById("root"))
