@@ -1,9 +1,9 @@
 import React from 'react'
-import Test from './components/CheckboxGroup/Test'
+import Comp from './components/Comps'
 export default function App() {
     return (
         <div>
-          <Test />
+          <Comp />
         </div>
     )
 }
