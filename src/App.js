@@ -1,15 +1,18 @@
 import React from 'react'
-import { A, B } from './components/Comps'
-import withLogin from './HOC/withLogin' 
+import { A } from './components/Comps'
+import withLog from './HOC/withLog' 
 
-const ALog = withLogin(A)
-const BLog = withLogin(B)
+const ALog = withLog(A)
 
 export default function App() {
+
+    const getRef = el => {
+      console.log(el)
+    }
+    
     return (
         <div>
-          <ALog a={1} isLogin />
-          <BLog b={2} isLogin />
+          <ALog a={1} forwardRef={getRef} />
         </div>
     )
 }
