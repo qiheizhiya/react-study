@@ -1,5 +1,5 @@
 import React from 'react'
-import Comp from './components/Comps'
+import Comp from './components/Banner/Test'
 export default function App() {
     return (
         <div>
