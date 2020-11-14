@@ -1,12 +1,10 @@
 import React from 'react'
-import OldContext from './OldContext'
-
-
-export default function App() {
-
-    return (
-        <div>
-          <OldContext />
-        </div>
-    )
+// import OldContext from "./OldContext";
+import NewContext from "./NewContext"
+export default class App extends React.Component {
+    render() {
+        return (
+            <NewContext />
+        )
+    }
 }
