@@ -1,29 +1,74 @@
-import React from 'react'
-var prev;
-export default function App() {
-    return <div onClick={e => {
-        console.log(prev === e);
-        console.log("react: div被点击了")
-    }}>
-        <input type="text" onFocus={e => {
-            console.log("react：文本获得了焦点")
-        }} />
-        <button onClick={e => {
-            console.log("react: 按钮被点击了");
-            prev = e;
-            e.persist()
-            setTimeout(() => {
-                console.log(e.type);
-            }, 1000);
-            // e.nativeEvent.stopImmediatePropagation()
-            // console.log(e.isPropagationStopped());
-            // e.stopPropagation();
-            // console.log(e.isPropagationStopped());
-        }}>按钮</button>
-    </div>
+import React, { PureComponent } from 'react'
+import { getAllStud } from "./fetch/index"
+
+class StudentList extends PureComponent {
+    render() {
+        const stus = this.props.stuList.map(it => <Student key={it.id} {...it} />)
+        return <ul>
+            {stus}
+        </ul>
+    }
 }
 
-document.querySelector("#root").onFocus = function(e){
-    console.log("阻止focus事件冒泡")
-    e.stopPropagation();
+class Student extends PureComponent {
+    render() {
+        return <li>
+            {
+                this.props.sex === 1 ? (
+                    <>
+                        <i>{this.props.name}</i>
+                        <i>{this.props.birth}</i>
+                        <i>{this.props.address}</i>
+                        <i>{this.props.email}</i>
+                        <i>{this.props.phone}</i>
+                        <i>{this.props.sex}</i>
+                    </>
+                ) : (
+                        <>
+                            <span>{this.props.name}</span>
+                            <span>{this.props.birth}</span>
+                            <span>{this.props.address}</span>
+                            <span>{this.props.email}</span>
+                            <span>{this.props.phone}</span>
+                            <span>{this.props.sex}</span>
+                        </>
+                    )
+            }
+
+        </li>
+    }
+}
+
+export default class App extends PureComponent {
+
+    state = {
+        stuList: []
+    }
+
+    loadStudents = async () => {
+        const stus = (await getAllStud()).data.findByPage
+        this.setState({
+            stuList: stus
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.loadStudents}>加载学生数据</button>
+                <button onClick={() => {
+                    this.setState({
+                        stuList: []
+                    })
+                }}>清空数据</button>
+                <button onClick={() => {
+                    this.setState({
+                        stuList: [...this.state.stuList.sort(() => Math.random() - 0.5)]
+                    })
+                }}>打乱顺序</button>
+                {/* 显示学生集合 */}
+                <StudentList stuList={this.state.stuList} />
+            </div>
+        )
+    }
 }
