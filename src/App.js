@@ -14,7 +14,7 @@ class Test extends React.PureComponent {
 }
 
 export default function App() {
-    console.log('App render111111111');
+    console.log('App render222222');
     const [txt, setTxt] = useState(123)
     const [n, setN] = useState(0)
 
