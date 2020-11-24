@@ -1,29 +1,22 @@
-import React, { useState, useMemo } from 'react'
-
-function Item(props) {
-    return <li>{props.value}</li>
-}
-
+import React, { useState, useRef, useEffect } from 'react'
 export default function App() {
-    const [range] = useState({ min: 1, max: 1000 })
-    const [n, setN] = useState(0)
-    const list = useMemo(() => {
-        const list = []
-        for (let i = range.min; i <= range.max; i++) {
-            list.push(<Item key={i} value={i}></Item>)
+    const [n, setN] = useState(10)
+    const nRef = useRef(n); // {current:10}
+    useEffect(() => {
+        const timer = setInterval(() => {
+            nRef.current--;
+            setN(nRef.current);
+            if(nRef.current === 0){
+                clearInterval(timer);
+            }
+        }, 1000)
+        return () => {
+            clearInterval(timer);
         }
-        return list
-    }, [range])
-
-    
+    }, [])
     return (
         <div>
-            {list}
-            <p>
-                <input type="number" value={n} onChange={e => {
-                    setN(e.target.value)
-                }} />
-            </p>
+            <h1>{n}</h1>
         </div>
     )
 }
