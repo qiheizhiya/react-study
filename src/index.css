@@ -1,19 +1,19 @@
-h1 {
-    transition: 1s;
+.container {
+  width: 100px;
+  margin: 0 auto;
 }
 
-.exited {
-    opacity: 0;
+.copContainer {
+  height: 100px;
+  position: relative;
 }
 
-.entered {
-    opacity: 1;
+.copContainer .title {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
-.entering {
-    opacity: .5;
-}
-
-.exiting {
-    opacity: 0;
+.exit-done {
+    display: none;
 }
