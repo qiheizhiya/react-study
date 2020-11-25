@@ -1,0 +1,19 @@
+h1 {
+    transition: 1s;
+}
+
+.exited {
+    opacity: 0;
+}
+
+.entered {
+    opacity: 1;
+}
+
+.entering {
+    opacity: .5;
+}
+
+.exiting {
+    opacity: 0;
+}
