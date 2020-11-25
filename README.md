@@ -1,6 +1,6 @@
-# Ref Hook
+# LayoutEffect Hook
 
-useRef函数：
+useEffect：浏览器渲染完成后，用户看到新的渲染结果之后
+useLayoutEffectHook：完成了DOM改动，但还没有呈现给用户
 
-1. 一个参数：默认值
-2. 返回一个固定的对象，```{current: 值}```
+应该尽量使用useEffect，因为它不会导致渲染阻塞，如果出现了问题，再考虑使用useLayoutEffectHook
