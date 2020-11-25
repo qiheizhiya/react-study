@@ -1,22 +1,37 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useMemo } from 'react'
+
+function Item(props) {
+    // console.log("Item Render " + props.value);
+    return <li>{props.value}</li>
+}
+
+
 export default function App() {
-    const [n, setN] = useState(10)
-    const nRef = useRef(n); // {current:10}
-    useEffect(() => {
-        const timer = setInterval(() => {
-            nRef.current--;
-            setN(nRef.current);
-            if(nRef.current === 0){
-                clearInterval(timer);
-            }
-        }, 1000)
-        return () => {
-            clearInterval(timer);
+    const [range,] = useState({ min: 1, max: 10000 })
+    const [n, setN] = useState(0)
+    const list = useMemo(() => {
+        const list = [];
+        for (let i = range.min; i <= range.max; i++) {
+            list.push(<Item key={i} value={i}></Item>)
         }
-    }, [])
+        return list;
+    }, [range.min, range.max])
+    // const list = [];
+    // for (let i = range.min; i <= range.max; i++) {
+    //     list.push(<Item key={i} value={i}></Item>)
+    // }
     return (
         <div>
-            <h1>{n}</h1>
+            <ul>
+                {list}
+            </ul>
+            <input type="number"
+                value={n}
+                onChange={e => {
+                    setN(parseInt(e.target.value))
+                }}
+            />
         </div>
+
     )
 }
