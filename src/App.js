@@ -1,5 +1,5 @@
 import React from 'react'
-import { HashRouter, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 function A () {
     return <h1>组件1</h1>
@@ -15,10 +15,12 @@ function C () {
 
 export default function App() {
     return (
-        <HashRouter>
-            <Route path='/a' exact component={A}></Route>
-            <Route path='/a/b' exact component={B}></Route>
-            <Route path='/c' exact component={C}></Route>
-        </HashRouter>
+        <Router>
+            <Switch>
+                <Route path='/a' sensitive exact component={A}></Route>
+                <Route path='/b' exact component={B}></Route>
+                <Route path='/c' exact component={C}></Route>
+            </Switch>
+        </Router>
     )
 }
