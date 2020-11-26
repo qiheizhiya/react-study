@@ -1,29 +1,22 @@
-import React, { useState, useMemo } from 'react'
-
-function Item(props) {
-    return <li>{props.value}</li>
-}
+import React, { useState } from 'react'
+import { SwitchTransition, CSSTransition } from 'react-transition-group'
+import 'animate.css'
 
 export default function App() {
-    const [range] = useState({ min: 1, max: 1000 })
-    const [n, setN] = useState(0)
-    const list = useMemo(() => {
-        const list = []
-        for (let i = range.min; i <= range.max; i++) {
-            list.push(<Item key={i} value={i}></Item>)
-        }
-        return list
-    }, [range])
-
-    
+    const [show1, setShow1] = useState(true)
     return (
         <div>
-            {list}
-            <p>
-                <input type="number" value={n} onChange={e => {
-                    setN(e.target.value)
-                }} />
-            </p>
+            <SwitchTransition mode="out-in">
+                <CSSTransition appear timeout={1000} key={show1}
+                    classNames={{
+                        exit: 'animate__bounceOut',
+                        enter: 'animate__bounceIn'
+                    }}
+                >
+                    <h1 className='animate__animated'>{show1? 'title1' : 'title2'}</h1>
+                </CSSTransition>
+            </SwitchTransition>
+            <button onClick={() => setShow1(!show1)}>切换控制</button>
         </div>
     )
 }
