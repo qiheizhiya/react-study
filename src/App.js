@@ -1,36 +1,41 @@
-import React, { useState } from 'react'
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import React, { PureComponent } from 'react'
+import FadeTransition from './components/FadeTransition'
+import { TransitionGroup } from 'react-transition-group'
 import { v1 } from 'uuid'
-import './App.css'
-import 'animate.css'
-
-
-export default function App() {
-    const [taskList, setTaskList] = useState([
-        { id: v1(), name: '任务1' },
-        { id: v1(), name: '任务2' },
-        { id: v1(), name: '任务3' }
-    ])
-    return (
-        <div>
-            <TransitionGroup component="ul" className="container" appear>
-                {
-                    taskList.map(it => (
-                        <CSSTransition timeout={2000} key={it.id}>
+export default class App extends PureComponent {
+    state = {
+        show: true,
+        tasks: [
+            { id: v1(), name: '任务1' },
+            { id: v1(), name: '任务2' },
+            { id: v1(), name: '任务3' }
+        ]
+    }
+    render() {
+        return (
+            <div>
+                <TransitionGroup>
+                    {
+                        this.state.tasks.map(it => <FadeTransition key={it.id}>
                             <li>
                                 {it.name}
                                 <button onClick={() => {
-                                    setTaskList(taskList.filter(item => item.name !== it.name))
+                                    this.setState({
+                                        tasks: this.state.tasks.filter(item => item.name !== it.name)
+                                    })
                                 }}>删除</button>
                             </li>
-                        </CSSTransition>
-                    ))
-                }
-            </TransitionGroup>
-            <button onClick={() => {
-                const name = window.prompt('请输入任务名称')
-                setTaskList([...taskList, { id: v1(), name }])
-            }}>添加一个任务</button>
-        </div>
-    )
+                        </FadeTransition>)
+                    }
+                </TransitionGroup>
+                
+                <button onClick={() => {
+                    const name = window.prompt('请输入任务名称')
+                    this.setState({
+                        tasks: [...this.state.tasks, { id: v1(), name }]
+                    })
+                }}>添加一个任务</button>
+            </div>
+        )
+    }
 }
