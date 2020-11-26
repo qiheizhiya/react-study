@@ -1,18 +1,25 @@
-# React 动画 - SwitchTransition
+# React Router 概述
 
-用于有秩序的切换内部组件
+React路由
 
-默认情况下是：out-in
+## 站点
 
-1. 当key值改变时，会将之前的DOM跟元素添加退出样式（exit，exit-active）
-2. 退出完成后，讲该DOM元素移除
-3. 重新渲染内部DOM元素
-4. 为该渲染的DOM根元素添加进入样式（enter，enter-active，enter-done）
+![](assets/2019-08-02-14-40-44.png)
 
-in-out：
-1. 重新渲染内部DOM元素，保留之前的元素
-2. 为新渲染的DOM根元素添加进入样式（enter，enter-active，enter-done）
-3. 讲之前的DOM根元素添加退出样式（exit，exit-active）
-4. 退出完成后，将该DOM元素移除
+无论是使用Vue，还是React，开发的单页应用程序，可能只是该站点的一部分（某一个功能块）
 
-> 该库寻找dom元素的方式，是使用已经过时的API：findDomNode，该方法匡元找到某个组件下的DOM根元素
+一个单页应用里，可能会划分为多个页面（几乎完全不同的页面效果）（组件）
+
+如果要在单页应用中完成组件的切换，需要实现下面两个功能：
+
+1. 根据不同的页面地址，展示不同的组件（核心）
+2. 完成无刷新的地址切换
+
+我们把实现了以上两个功能的插件，称之为路由
+
+## React Router
+
+1. react-router：路由核心库，包含诸多和路由功能相关的核心代码
+2. react-router-dom：利用路由核心库，结合实际的页面，实现跟页面路由密切相关的功能
+
+如果是在页面中实现路由，需要安装react-router-dom库
