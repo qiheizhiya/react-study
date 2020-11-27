@@ -5,8 +5,13 @@ export function getAllStud () {
 }
 
 export function getFindPage (page = 1, size = 10) {
-  return fetch(`/api/student/findByPage?appkey=${appKey}?page=${page}&size=${size}`)
+  return fetch(`/api/student/findByPage?appkey=${appKey}&page=${page}&size=${size}`)
 }
+
+export function getSearchStud (page = 1, size = 10, search = '123', sex = -1 ) {
+  return fetch(`/api/student/searchStudent?appkey=${appKey}&page=${page}&size=${size}&search=${search}&sex=${sex}`).then(res => res.json()).then(res => res.data)
+}
+
 
 export async function mockAllStud (page = 1, limit = 10) {
   const arr = [
