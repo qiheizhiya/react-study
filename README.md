@@ -1,35 +1,49 @@
-# 路由组件
+# 其他组件
 
-React-Router 为我们提供了两个重要组件
+已学习：
 
-## Router组件
+- Router：BrowswerRouter、HashRouter
+- Route
+- Switch
+- 高阶函数：withRouter
 
-它本身不做任何展示，仅提供路由模式配置，另外，该组件会产生一个上下文，上下文中会提供一些实用的对象和方法，供其他相关组件使用
+## Link
 
-1. HashRouter：该组件，使用hash模式匹配
-2. BrowserRouter：该组件，使用BrowserHistory模式匹配
+生成一个无刷新跳转的a元素
 
-通常情况下，Router组件只有一个，将该组件包裹整个页面
+- to
+  - 字符串：跳转的目标地址
+  - 对象：
+    - pathname：url路径
+    - search
+    - hash
+    - state：附加的状态信息
+- replace：bool，表示是否是替换当前地址，默认是false
+- innerRef：可以将内部的a元素的ref附着在传递的对象或函数参数上
+  - 函数
+  - ref对象
 
-## Route组件
+## NavLink
 
-根据不同的地址，展示不同的组件
+是一种特殊的Link，Link组件具备的功能，它都有
 
-重要属性：
+它具备的额外功能是：根据当前地址和链接地址，来决定该链接的样式
 
-1. path：匹配的路径
-   1. 默认情况下，不区分大小写，可以设置sensitive属性为true，来区分大小写
-   2. 默认情况下，只匹配初始目录，如果要精确匹配，配置exact属性为true
-   3. 如果不写path，则会匹配任意路径
-2. component：匹配成功后要显示的组件
-3. children：
-   1. 传递React元素，无论是否匹配，一定会显示children，并且会忽略component属性
-   2. 传递一个函数，该函数有多个参数，这些参数来自于上下文，该函数返回react元素，则一定会显示返回的元素，并且忽略component属性
+- activeClassName: 匹配时使用的类名
+- activeStyle: 匹配时使用的内联样式
+- exact: 是否精确匹配
+- sensitive：匹配时是否区分大小写
+- strict：是否严格匹配最后一个斜杠
 
-Route组件可以写到任意的地方，只要保证它是Router组件的后代元素
+## Redirect
 
-## Switch组件
+重定向组件，当加载到该组件时，会自动跳转（无刷新）到另外一个地址
 
-写到Switch组件中的Route组件，当匹配到第一个Route后，会立即停止匹配
-
-由于Switch组件会循环所有子元素，然后让每个子元素去完成匹配，若匹配到，则渲染对应的组件，然后停止循环。因此，不能在Switch的子元素中使用除Route外的其他组件。
+- to：跳转的地址
+  - 字符串
+  - 对象
+- push: 默认为false，表示跳转使用替换的方式，设置为true后，则使用push的方式跳转
+- from：当匹配到from地址规则时才进行跳转
+- exact: 是否精确匹配from
+- sensitive：from匹配时是否区分大小写
+- strict：from是否严格匹配最后一个斜杠
