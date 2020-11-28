@@ -8,7 +8,9 @@ export default function StudentTable(props) {
     <td>{s.sex === 1 ? '女' : '男'}</td>
     <td>{s.birth}</td>
     <td>{s.email}</td>
-    <td>/</td>
+    <td>
+      <a href={`/students/${s.sNo}`}>详情</a>
+    </td>
   </tr>)
   return (
     <table className='tab'>
