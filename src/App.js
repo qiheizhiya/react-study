@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, NavLink } from 'react-router-dom'
-import RouteGuard from './RouteGuard'
+import RouteGuard from './HookRouteGuard'
 
 function Page1() {
     return <h1>Page1</h1>
