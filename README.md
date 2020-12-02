@@ -1,49 +1,34 @@
-# 其他组件
+# 导航守卫
 
-已学习：
+导航守卫：当离开一个页面，进入另一个页面时，触发的事件
 
-- Router：BrowswerRouter、HashRouter
-- Route
-- Switch
-- 高阶函数：withRouter
+history对象
 
-## Link
+- listen: 添加一个监听器，监听地址的变化，当地址发生变化时，会调用传递的函数
+  - 参数：函数，运行时间点：发生在即将跳转到新页面时
+    - 参数1：location对象，记录当前的地址信息
+    - 参数2：action，一个字符串，表示进入该地址的方式
+      - POP：出栈
+        - 通过点击浏览器后退、前进
+        - 调用history.go
+        - 调用history.goBack
+        - 调用history.goForward
+      - PUSH：入栈
+        - history.push
+      - REPLACE：替换
+        - history.replace
+  - 返回结果：函数，可以调用该函数取消监听
+- block：设置一个阻塞，并同时设置阻塞消息，当页面发生跳转时，会进入阻塞，并将阻塞消息传递到路由根组件的getUserConfirmation方法。
+  - 返回一个回调函数，用于取消阻塞器
 
-生成一个无刷新跳转的a元素
 
-- to
-  - 字符串：跳转的目标地址
-  - 对象：
-    - pathname：url路径
-    - search
-    - hash
-    - state：附加的状态信息
-- replace：bool，表示是否是替换当前地址，默认是false
-- innerRef：可以将内部的a元素的ref附着在传递的对象或函数参数上
-  - 函数
-  - ref对象
+路由根组件
 
-## NavLink
-
-是一种特殊的Link，Link组件具备的功能，它都有
-
-它具备的额外功能是：根据当前地址和链接地址，来决定该链接的样式
-
-- activeClassName: 匹配时使用的类名
-- activeStyle: 匹配时使用的内联样式
-- exact: 是否精确匹配
-- sensitive：匹配时是否区分大小写
-- strict：是否严格匹配最后一个斜杠
-
-## Redirect
-
-重定向组件，当加载到该组件时，会自动跳转（无刷新）到另外一个地址
-
-- to：跳转的地址
-  - 字符串
-  - 对象
-- push: 默认为false，表示跳转使用替换的方式，设置为true后，则使用push的方式跳转
-- from：当匹配到from地址规则时才进行跳转
-- exact: 是否精确匹配from
-- sensitive：from匹配时是否区分大小写
-- strict：from是否严格匹配最后一个斜杠
+- getUserConfirmation
+  - 参数：函数
+    - 参数1：阻塞消息
+      - 字符串消息
+      - 函数，函数的返回结果是一个字符串，用于表示阻塞消息
+        - 参数1：location对象
+        - 参数2：action值
+    - 参数2：回调函数，调用该函数并传递true，则表示进入到新页面，否则，不做任何操作
