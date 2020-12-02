@@ -1,49 +1,59 @@
-import React, { PureComponent } from 'react'
-import { withRouter, BrowserRouter as Router } from 'react-router-dom'
-let prevLoaction, location, action, unBlock
+import React, { Component } from 'react'
+import { BrowserRouter as Router, withRouter } from "react-router-dom"
 
-class _GuardHelper extends PureComponent {
-  componentDidMount() {
-    // 添加阻塞
-    unBlock = this.props.history.block((newLocation, ac) => {
-      prevLoaction = this.props.location
-      location = newLocation
-      action = ac
-      return ''
-    })
+let prevLoaction, location, action, unBlock;
 
-    this.unListen = this.props.history.listen((location, action) => {
-      if (this.props.onChange) {
-        const prevLocation = this.props.location
-        this.props.onChange(prevLocation, location, action, this.unListen)
-      }
-    })
-  }
-  componentWillUnmount() {
-    unBlock()
-    this.unListen()
-  }
+class _GuardHelper extends Component {
 
-  render () {
-    return null
-  }
+    componentDidMount() {
+        //添加阻塞
+        unBlock = this.props.history.block((newLocation, ac) => {
+            prevLoaction = this.props.location;
+            location = newLocation;
+            action = ac;
+            return "";
+        });
+
+        //添加一个监听器
+        this.unListen = this.props.history.listen((location, action) => {
+            if (this.props.onChange) {
+                const prevLoaction = this.props.location;
+                this.props.onChange(prevLoaction, location, action, this.unListen);
+            }
+        })
+    }
+
+    componentWillUnmount() {
+        unBlock();//取消阻塞
+        //卸载监听器
+        this.unListen();
+    }
+
+
+    render() {
+        return null;
+    }
 }
 
-const GuardHelper = withRouter(_GuardHelper)
+const GuardHelper = withRouter(_GuardHelper);
 
-export default class RouteGuard extends PureComponent {
+class RouteGuard extends Component {
 
-  handleConfirm = (mag, callback) => {
-    if (this.props.onBeforeChange) this.props.onBeforeChange(prevLoaction, location, action, callback, unBlock)
-    else callback(true)
-  }
+    handleConfirm = (msg, commit) => {
+        if (this.props.onBeforeChange) {
+            this.props.onBeforeChange(prevLoaction, location, action, commit, unBlock);
+        }
+        else{
+            commit(true);
+        }
+    }
 
-  render() {
-    return (
-      <Router getUserConfirmation={this.handleConfirm} >
-        <GuardHelper onChange={this.props.onChange} />
-        {this.props.children}
-      </Router>
-    )
-  }
+    render() {
+        return <Router getUserConfirmation={this.handleConfirm}>
+            <GuardHelper onChange={this.props.onChange} />
+            {this.props.children}
+        </Router>;
+    }
 }
+
+export default RouteGuard;

@@ -1,17 +1,35 @@
-nav a {
-  margin: 0 10px;
-  text-decoration: none;
-  color: #008c8c;
-  border: 1px solid;
-  padding: 3px;
-  border-radius: 6px;
+.page{
+    width: 1600px;
+    border: 2px solid;
+    margin: 0 auto;
 }
-nav a:hover {
-  color: yellowgreen;
+
+.page1{
+    background: lightblue;
 }
-nav a.active {
-  color: #000;
+
+.page2{
+    background: lightgreen;
 }
-nav a.active:hover {
-  color: lightcoral;
+
+.nav{
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #008c8c;
+    color: #fff;
+    padding: 20px;
+}
+
+.nav a{
+    color: inherit;
+    display: block;
+    margin: 20px 0;
+    text-decoration: none;
+    font-size: 2em;
+}
+
+.nav a.active{
+    color: yellow;
 }
