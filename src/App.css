@@ -1,17 +1,11 @@
-nav a {
-  margin: 0 10px;
-  text-decoration: none;
-  color: #008c8c;
-  border: 1px solid;
-  padding: 3px;
-  border-radius: 6px;
+.main {
+  width: 800px;
+  margin: 0 auto;
 }
-nav a:hover {
-  color: yellowgreen;
-}
-nav a.active {
-  color: #000;
-}
-nav a.active:hover {
-  color: lightcoral;
+
+.page-container{
+  overflow: hidden;
+  width: 100%;
+  height: 300px;
+  position: relative;
 }

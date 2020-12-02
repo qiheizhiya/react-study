@@ -1,0 +1,13 @@
+.enter {
+  transition: all .8s;
+  opacity: 0;
+}
+.enter-active {
+  opacity: 1;
+}
+.exit {
+  transition: all .8s;
+}
+.exit-active {
+  opacity: 0;
+}
