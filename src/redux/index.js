@@ -1,5 +1,4 @@
-
-
+import { createStore } from 'redux'
 /**
  * 
  * @param {*} state 之前仓库中的状态（数据）
@@ -13,3 +12,12 @@ function reducer(state, action) {
   }
   return state
 }
+
+const state = createStore(reducer, 10)
+const action = { type: 'increase' }
+
+console.log(state.getState())
+
+state.dispatch(action)
+
+console.log(state.getState())
