@@ -1,21 +1,4 @@
-/**
- * 判断这个对象是不是一个平面对象
- * @param {Object} obj 
- */
-function isPlainObject (obj) {
-    if (typeof obj !== 'object') {
-        return false
-    }
-    return Object.getPrototypeOf(obj) === Object.prototype
-}
-
-function getRandomString (length) {
-    return Math.random().toString(36).substr(2, length).split("").join('.')
-}
-const actionTypes = {
-    INIT: `@redux/INIT${getRandomString(6)}`,
-    PROBE_UNKNOWN_ACTION: `@redux/PROBE_UNKNOWN_ACTION${getRandomString(6)}`
-}
+import { isPlainObject, actionTypes } from './utils'
 
 /**
  * 实现createStore的功能
@@ -33,6 +16,7 @@ export default function (reducer, defaultValue) {
         if (!isPlainObject(action)) {
             throw new Error('action must be a plain object')
         }
+        
         if (!action.type) {
             throw new Error('action must has a property of type')
         }

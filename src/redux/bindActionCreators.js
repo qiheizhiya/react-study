@@ -1,6 +1,5 @@
 export default function (actionCreators, dispatch) {
     if (typeof actionCreators === 'function') {
-        console.log('是函数');
         return getAutoDispatchActionCreator(actionCreators, dispatch)
     }
     else if (typeof actionCreators === 'object') {
