@@ -1,4 +1,5 @@
-import { actionTypes, isPlainObject } from './utils'
+import actionTypes from './utils/actionTypes'
+import isPlainObject from './utils/isPlainObject'
 function validateReducers (reducers) {
     if (typeof reducers !== 'object') {
         throw new Error('reducers must be an object')

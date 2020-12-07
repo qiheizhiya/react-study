@@ -1,4 +1,5 @@
-import { isPlainObject, actionTypes } from './utils'
+import actionTypes from './utils/actionTypes'
+import isPlainObject from './utils/isPlainObject'
 
 /**
  * 实现createStore的功能
