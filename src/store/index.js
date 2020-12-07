@@ -1,22 +1,31 @@
-import { createStore} from "redux";
-import { bindActionCreators, applyMiddleware } from "../redux";
+import { createStore, bindActionCreators, applyMiddleware } from "../redux";
 import reducer from "./reducer"
 // import { createAddUserAction, createDeleteUserAction } from "./action/usersAction"
 import * as usersActions from './action/usersAction'
 
-function logger1 (store) {
-    return function(next) {
-        console.log(next, '我是1next');
-        return function (action) {
-            console.log('我是中间件1');
-            console.log('我是中间件1的next方法', next);
-            console.log(store.getState());
-            console.log('我去next了');
-            next(action)
-            console.log(store.getState());
-            console.log('我next回来了');
-        }
-    }
+// function logger1 (store) {
+//     return function(next) {
+//         console.log(next, '我是1next');
+//         return function (action) {
+//             console.log('我是中间件1');
+//             console.log('我是中间件1的next方法', next);
+//             console.log(store.getState());
+//             console.log('我去next了');
+//             next(action)
+//             console.log(store.getState());
+//             console.log('我next回来了');
+//         }
+//     }
+// }
+
+const logger1 = store => next => action => {
+    console.log('我是中间件1');
+    console.log('我是中间件1的next方法', next);
+    console.log(store.getState());
+    console.log('我去next了');
+    next(action)
+    console.log(store.getState());
+    console.log('我next回来了');
 }
 
 function logger2 (store) {
