@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var iterator = {
+            a: 1,
+            b: 1,
+            currentIndex: 1,
+            next() {
+                if (this.currentIndex === 1 || this.currentIndex === 2) {
+                    this.currentIndex++
+                    return {
+                        value: 1,
+                        done: false
+                    }
+                }
+                var c = this.a +this. b
+                this.b = this.a
+                this.a = c
+                return {
+                    value: c,
+                    done: false
+                }
+            }
+        }
+        var i = 0
+        while (i < 6) {
+            i++
+            console.log(iterator.next().value)
+        }
+        function fibonacci(num) {
+            if (num === 1 || num === 2) return 1
+            return fibonacci(num - 1) + fibonacci(num - 2)
+        }
+    </script>
+</body>
+
+</html>
