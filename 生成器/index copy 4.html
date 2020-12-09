@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* createGenerator() {
+            console.log('生成器函数开始')
+            let result = yield 1 // { value: 1, done: false }
+            console.log('运行1', result)
+            result = yield 2
+            console.log('运行2', result)
+            result = yield 3
+            console.log('运行3', result)
+            return '结束'
+        }
+        var generator = createGenerator()
+        var result = generator.next()
+        while(!result.done) {
+            result = generator.next(result.value)
+        }
+    </script>    
+</body>
+</html>

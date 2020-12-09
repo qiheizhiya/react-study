@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function funcA() {
+            return 'a'
+        }
+        async function funcB() {
+            return 'b'
+        }
+
+        function* task() {
+            const a = yield funcA()
+            console.log(a)
+            const b = yield funcB()
+            console.log(b)
+        }
+
+        function run(generatorFunction) {
+            const generator = generatorFunction()
+            next()
+
+            function next (nextValue) {
+                const result = generator.next()
+                if (result.done) return // 迭代结束了
+                const value = result.value // 拿到迭代的数据
+                if (typeof value.then === 'function') {
+                    value.then(value => generator.next(value))
+                } else {
+                    next(value)
+                }
+            }
+        }
+        run(task)
+    </script>
+</body>
+
+</html>
