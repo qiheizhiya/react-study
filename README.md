@@ -1,12 +1,3 @@
-# Store
+# redux-promise
 
-Store：用于保存数据
-
-通过createStore方法创建的对象。
-
-该对象的成员：
-
-- dispatch：分发一个action
-- getState：得到仓库中当前的状态
-- replaceReducer：替换掉当前的reducer
-- subscribe：注册一个监听器，监听器是一个无参函数，该分发一个action之后，会运行注册的监听器。该函数会返回一个函数，用于取消监听
+如果action是一个promise，则会等待promise完成，将完成的结果作为action触发，如果action不是一个promise，则判断其payload是否是一个promise，如果是，等待promise完成，然后将得到的结果作为payload的值触发。
