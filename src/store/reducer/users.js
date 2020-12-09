@@ -8,6 +8,9 @@ export default (state = initialState, { type, payload }) => {
     switch (type) {
 
     case ADDUSER:
+        if (Array.isArray(payload)) {
+            return [...state, ...payload]
+        }
         return [...state, payload]
 
     case DELETEUSER:

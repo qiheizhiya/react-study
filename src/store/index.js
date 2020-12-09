@@ -1,5 +1,7 @@
 import { createStore, bindActionCreators, applyMiddleware } from "../redux";
+import logger from 'redux-logger'
 import reducer from "./reducer"
+import thunk from 'redux-thunk'
 // import { createAddUserAction, createDeleteUserAction } from "./action/usersAction"
 import * as usersActions from './action/usersAction'
 
@@ -43,15 +45,11 @@ function logger2 (store) {
     }
 }
 
-const store = createStore(reducer, applyMiddleware(logger1, logger2));
-console.log(store)
+const store = createStore(reducer, applyMiddleware(thunk, logger1, logger2, logger));
 // const store = applyMiddleware(logger1, logger2)(createStore)(reducer)
 
 const bindUserActions = bindActionCreators(usersActions, store.dispatch)
-bindUserActions.createAddUserAction({
-    id: 3,
-    name: "abc",
-    age: 10
-});
+bindUserActions.fetchUsers()
+// store.dispatch(usersActions.fetchUsers())
 
 // store.dispatch(createDeleteUserAction(3));
