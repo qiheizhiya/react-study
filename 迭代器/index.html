@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 创建一个给用户迭代的迭代器
+        function createArrayIterator (arr) {
+            let i = 0
+            return {
+                next () {
+                    return { value: arr[i++], done: i > arr.length }
+                }
+            }
+        }
+        const iterator = createArrayIterator([1,2,3])
+        
+    </script>
+</body>
+
+</html>
