@@ -1,16 +1,4 @@
-import { addUser } from '../action'
+import { combineReducers } from 'redux'
+import student from './student'
 
-const initialState = []
-
-export default (state = initialState, { type, payload }) => {
-    switch (type) {
-
-    case addUser:
-        if (Array.isArray(payload)) {
-            return [...state, ...payload]
-        }
-        return [...state, payload]
-    default:
-        return state
-    }
-}
+export default combineReducers({ student })
