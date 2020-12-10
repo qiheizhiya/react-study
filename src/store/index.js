@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import reducer from './reducer'
 import logger from 'redux-logger'
-import studentTask from './saga/studentTask'
+import countertask from './saga/countertask'
 import createSagaMiddleware from 'redux-saga'
 
 const sagaMid = createSagaMiddleware()
@@ -9,6 +9,6 @@ const sagaMid = createSagaMiddleware()
 const store = createStore(reducer, applyMiddleware(sagaMid, logger))
 
 
-sagaMid.run(studentTask)
+sagaMid.run(countertask)
 
 export default store
