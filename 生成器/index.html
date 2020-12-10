@@ -9,36 +9,28 @@
 
 <body>
     <script>
-        async function funcA() {
-            return 'a'
+        function* g2() {
+            console.log("g2-开始");
+            let result = yield "g1";
+            console.log("g2-运行1");
+            result = yield "g2";
+            return 123;
         }
-        async function funcB() {
-            return 'b'
+        //下面的函数是一个生成器函数，用于创建生成器
+        function* createGenerator() {
+            console.log("生成器函数的函数体 - 开始");
+            let result = yield 1; //将1作为第一次的迭代的值
+            result = yield* g2(); //result为g2函数的返回值
+            console.log("生成器函数的函数体 - 运行1", result);
+            result = yield 2; //将2作为第二次迭代的值
+            console.log("生成器函数的函数体 - 运行2", result);
+            result = yield 3;
+            console.log("生成器函数的函数体 - 运行3", result);
+            return "结束";
+
         }
 
-        function* task() {
-            const a = yield funcA()
-            console.log(a)
-            const b = yield funcB()
-            console.log(b)
-        }
-
-        function run(generatorFunction) {
-            const generator = generatorFunction()
-            next()
-
-            function next (nextValue) {
-                const result = generator.next()
-                if (result.done) return // 迭代结束了
-                const value = result.value // 拿到迭代的数据
-                if (typeof value.then === 'function') {
-                    value.then(value => generator.next(value))
-                } else {
-                    next(value)
-                }
-            }
-        }
-        run(task)
+        var generator = createGenerator(); //调用后，一定得到一个生成器
     </script>
 </body>
 
