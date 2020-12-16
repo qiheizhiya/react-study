@@ -1,21 +1,20 @@
-import {  fork, take, delay, put, cancel } from 'redux-saga/effects'
-import { actionTypes, increase } from '../action/counter'
+import { takeEvery, put, delay } from 'redux-saga/effects'
+// import counterTask from './countertask'
+import { actionTypes, increase, decrease } from '../action/counter'
+// import studentTask from './studentTask'
 
-function* autoIncreasae () {
-    let task
-    while (true) {
-        yield take(actionTypes.autoIncrease)
-        if (task) yield cancel(task)
-        task = yield fork(function* (){
-            yield delay(2000)
-            yield put(increase())
-        })
-    }
+function* asyncIncrease () {
+    yield delay(2000)
+    yield put(increase())
+}
+
+function* asyncDecrease () {
+    yield delay(2000)
+    yield put(decrease())
 }
 
 export default function* () {
-
-    yield fork(autoIncreasae)
-    console.log('autoIncrease被监听了');
-
+    yield takeEvery(actionTypes.asyncIncrease, asyncIncrease)
+    yield takeEvery(actionTypes.asyncDecrease, asyncDecrease)
+    console.log("正在监听asyncIncrease、asyncDecrease")
 }

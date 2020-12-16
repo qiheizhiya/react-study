@@ -7,7 +7,7 @@ import createSagaMiddleware from 'redux-saga'
 const sagaMid = createSagaMiddleware()
 
 const store = createStore(reducer, applyMiddleware(sagaMid, logger))
-
+console.log(store.getState())
 sagaMid.run(countertask)
 
 export default store

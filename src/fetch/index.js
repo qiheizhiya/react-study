@@ -8,8 +8,8 @@ export function getFindPage (page = 1, size = 10) {
   return fetch(`/api/student/findByPage?appkey=${appKey}&page=${page}&size=${size}`)
 }
 
-export function getSearchStud ({ page = 1, size = 10, search, sex = -1 } ) {
-  return fetch(`/api/student/searchStudent?appkey=${appKey}&page=${page}&size=${size}&search=${search || '1'}&sex=${sex}`).then(res => res.json()).then(res => res.data)
+export function getSearchStud ({page = 1, size = 10, key, sex = -1}) {
+  return fetch(`/api/student/searchStudent?appkey=${appKey}&page=${page}&size=${size}&search=${key || '1'}&sex=${sex}`).then(res => res.json()).then(res => res.data)
 }
 
 
