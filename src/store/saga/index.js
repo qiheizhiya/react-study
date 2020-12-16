@@ -1,12 +1,20 @@
-import { all, call } from 'redux-saga/effects'
-import counterTask from './countertask'
-import studentTask from './studentTask'
+import { takeEvery, put, delay } from 'redux-saga/effects'
+// import counterTask from './countertask'
+import { actionTypes, increase, decrease } from '../action/counter'
+// import studentTask from './studentTask'
 
-async function a () {
-    return 1
+function* asyncIncrease () {
+    yield delay(2000)
+    yield put(increase())
 }
+
+function* asyncDecrease () {
+    yield delay(2000)
+    yield put(decrease())
+}
+
 export default function* () {
-    console.log(call(a))
-    const action = yield call(a)
-    console.log('all调用了', action);
+    yield takeEvery(actionTypes.asyncIncrease, asyncIncrease)
+    yield takeEvery(actionTypes.asyncDecrease, asyncDecrease)
+    console.log("正在监听asyncIncrease、asyncDecrease")
 }
