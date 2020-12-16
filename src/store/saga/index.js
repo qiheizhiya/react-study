@@ -1,8 +1,12 @@
-import { all } from 'redux-saga/effects'
+import { all, call } from 'redux-saga/effects'
 import counterTask from './countertask'
 import studentTask from './studentTask'
 
+async function a () {
+    return 1
+}
 export default function* () {
-    const action = yield all([counterTask(), studentTask()])
+    console.log(call(a))
+    const action = yield call(a)
     console.log('all调用了', action);
 }
