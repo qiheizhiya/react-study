@@ -1,3 +1,4 @@
 import store from './index'
-import { createAddUserAction } from './action'
-store.dispatch(createAddUserAction({id: 1, name: '呱呱1号'}))
+// import { change } from './action/student/searchCondition'
+import { fetchStudents } from './action/student/searchResult'
+store.dispatch(fetchStudents(store.getState().student.searchCondition))
