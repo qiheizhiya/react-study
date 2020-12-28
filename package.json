@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "animate.css": "^4.1.1",
+    "dva": "^2.4.1",
+    "history": "^5.0.0",
     "is-generator": "^1.0.3",
     "is-promise": "^4.0.0",
     "loadash": "^1.0.0",
