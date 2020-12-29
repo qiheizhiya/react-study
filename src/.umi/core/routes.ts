@@ -29,14 +29,14 @@ export function getRoutes() {
         "path": "/sub",
         "routes": [
           {
-            "path": "/sub/id?",
-            "exact": true,
-            "component": require('@/pages/sub/id$.js').default
-          },
-          {
             "path": "/sub",
             "exact": true,
             "component": require('@/pages/sub/index.js').default
+          },
+          {
+            "path": "/sub/:id",
+            "exact": true,
+            "component": require('@/pages/sub/[id].js').default
           }
         ],
         "component": require('@/pages/sub/_layout.js').default
