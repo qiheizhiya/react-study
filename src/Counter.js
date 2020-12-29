@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { connect } from 'dva'
+import Modal from './components/Modal'
 
 function Counter(props) {
     const inp = useRef()
@@ -17,12 +18,14 @@ function Counter(props) {
                     props.onAdd(n)
                 }}>加上</button>
             </p>
+            {props.isLoading && <Modal>正在加载中。。。</Modal>}
         </div>
     )
 }
 
 const mapStateToProps = state => ({
-    number: state.counter
+    number: state.counter,
+    isLoading: state.loading.global
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -3,6 +3,7 @@ import dva from 'dva'
 import counterModel from './models/counter'
 import studentModel from './models/student'
 import { createBrowserHistory } from 'history'
+import dvaLoading from 'dva-loading'
 
 // 得到一个dva对象
 const app = dva({
@@ -14,6 +15,7 @@ const app = dva({
         console.log(...args)
     }
 })
+app.use(dvaLoading())
 
 // 在启动之前定义模型
 app.model(counterModel)
