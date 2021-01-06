@@ -1,11 +1,13 @@
 import React from 'react'
 import { NavLink } from 'umi'
+
 export default function index(props) {
     console.log(props);
     return (
         <div>
-            <p><NavLink to="/">首页</NavLink></p>
-            <p><NavLink to="/sub">sub页面</NavLink></p>
+            <NavLink to='/' >首页</NavLink> <br />
+            <NavLink to='/login' >登录</NavLink> <br />
+            <NavLink to='/welcome' >欢迎</NavLink>
             {props.children}
         </div>
     )

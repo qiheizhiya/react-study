@@ -13,33 +13,19 @@ export function getRoutes() {
       {
         "path": "/",
         "exact": true,
-        "component": require('@/pages/index.js').default
+        "component": require('@/pages/index.js').default,
+        "title": "首页"
       },
       {
-        "path": "/page1",
+        "path": "/login",
         "exact": true,
-        "component": require('@/pages/page1.js').default
+        "component": require('@/pages/login.js').default
       },
       {
-        "path": "/page2",
+        "path": "/welcome",
         "exact": true,
-        "component": require('@/pages/page2.js').default
-      },
-      {
-        "path": "/sub",
-        "routes": [
-          {
-            "path": "/sub",
-            "exact": true,
-            "component": require('@/pages/sub/index.js').default
-          },
-          {
-            "path": "/sub/:id",
-            "exact": true,
-            "component": require('@/pages/sub/[id].js').default
-          }
-        ],
-        "component": require('@/pages/sub/_layout.js').default
+        "component": require('@/pages/welcome.js').default,
+        "wrappers": [require('@/routes/PrivateRoute').default]
       }
     ]
   }
