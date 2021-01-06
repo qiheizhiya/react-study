@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/qiheizhiya/react-study/issues"
   },
-  "homepage": "https://github.com/qiheizhiya/react-study#readme"
+  "homepage": "https://github.com/qiheizhiya/react-study#readme",
+  "dependencies": {
+    "@umijs/preset-react": "^1.7.9",
+    "umi": "^3.3.3"
+  }
 }

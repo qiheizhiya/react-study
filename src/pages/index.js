@@ -1,7 +1,4 @@
-/**
- * title: 首页
- * 
- */
+
 import React from 'react'
 
 function Index() {
@@ -11,7 +8,5 @@ function Index() {
         </div>
     )
 }
-
-Index.title = "首页"
 
 export default Index

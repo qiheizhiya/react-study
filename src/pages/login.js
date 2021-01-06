@@ -6,7 +6,7 @@ export default function login() {
     return (
         <div>
             <p>
-                账号：<input ref={txtLoginId} type="text"/>
+                账号12323412：<input ref={txtLoginId} type="text"/>
             </p>
             <p>
                 密码：<input ref={txtLoginPwd} type="password" name="" id=""/>

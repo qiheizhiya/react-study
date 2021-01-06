@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from 'react';
-import { ApplyPluginsType } from 'C:/Users/admin/AppData/Local/Yarn/Data/global/node_modules/@umijs/runtime';
+import { ApplyPluginsType } from 'E:/我的项目相关/15.react/react-study/node_modules/@umijs/runtime';
 import * as umiExports from './umiExports';
 import { plugin } from './plugin';
 
@@ -11,15 +11,24 @@ export function getRoutes() {
     "component": require('@/layouts/index.js').default,
     "routes": [
       {
+        "path": "/counter",
+        "exact": true,
+        "component": require('@/pages/counter.js').default
+      },
+      {
         "path": "/",
         "exact": true,
-        "component": require('@/pages/index.js').default,
-        "title": "首页"
+        "component": require('@/pages/index.js').default
       },
       {
         "path": "/login",
         "exact": true,
         "component": require('@/pages/login.js').default
+      },
+      {
+        "path": "/sub",
+        "exact": true,
+        "component": require('@/pages/sub/index.js').default
       },
       {
         "path": "/welcome",
