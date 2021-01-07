@@ -19,6 +19,7 @@
   "homepage": "https://github.com/qiheizhiya/react-study#readme",
   "dependencies": {
     "@umijs/preset-react": "^1.7.9",
+    "ansi-styles": "^5.0.0",
     "umi": "^3.3.3"
   }
 }
