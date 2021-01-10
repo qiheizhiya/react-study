@@ -11,14 +11,10 @@ export function getRoutes() {
     "component": require('@/layouts/index.js').default,
     "routes": [
       {
-        "path": "/counter",
-        "exact": true,
-        "component": require('@/pages/counter.js').default
-      },
-      {
         "path": "/",
         "exact": true,
-        "component": require('@/pages/index.js').default
+        "component": require('@/pages/index.js').default,
+        "wrappers": [require('@/wrappers/privateRouter').default]
       },
       {
         "path": "/login",
@@ -26,15 +22,19 @@ export function getRoutes() {
         "component": require('@/pages/login.js').default
       },
       {
-        "path": "/sub",
+        "path": "/student/add",
         "exact": true,
-        "component": require('@/pages/sub/index.js').default
+        "component": require('@/pages/student/add.js').default
       },
       {
-        "path": "/welcome",
+        "path": "/student",
         "exact": true,
-        "component": require('@/pages/welcome.js').default,
-        "wrappers": [require('@/routes/PrivateRoute').default]
+        "component": require('@/pages/student/index.js').default
+      },
+      {
+        "path": "/student/:id",
+        "exact": true,
+        "component": require('@/pages/student/[id].js').default
       }
     ]
   }

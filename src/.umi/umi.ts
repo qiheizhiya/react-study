@@ -9,7 +9,7 @@ import { renderClient } from 'E:/我的项目相关/15.react/react-study/node_mo
 import { getRoutes } from './core/routes';
 
 
-
+require('../global.css');
 
 const getClientRender = (args: { hot?: boolean; routes?: any[] } = {}) => plugin.applyPlugins({
   key: 'render',

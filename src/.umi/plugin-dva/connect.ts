@@ -6,10 +6,8 @@ import { EffectsCommandMap, SubscriptionAPI } from 'dva';
 import { match } from 'react-router-dom';
 import { Location, LocationState, History } from 'history';
 
-export * from 'E:/我的项目相关/15.react/react-study/src/models/counter';
-export * from 'E:/我的项目相关/15.react/react-study/src/models/student';
-export * from 'E:/我的项目相关/15.react/react-study/src/pages/sub/models/test';
-export * from 'E:/我的项目相关/15.react/react-study/src/pages/sub/model';
+export * from 'E:/我的项目相关/15.react/react-study/src/models/loginUser';
+export * from 'E:/我的项目相关/15.react/react-study/src/models/students';
 
 export interface Action<T = any> {
   type: T
