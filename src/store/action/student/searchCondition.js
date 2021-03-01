@@ -1,12 +1,18 @@
-export const actionTypes = {
-    change: 'CHANGE'
-}
 /**
- * action creator创建函数
- * 根据新的查询条件，产生一个action
- * @param {*} payload 
+ * 对学生查询条件改变的action的类型
  */
-export const change = (payload) => ({
-    type: actionTypes.change,
-    payload
-})
+export const actionTypes = {
+    change: "CHANGE"
+}
+
+/**
+ * action creator
+ * 根据新的查询条件，产生一个action
+ * @param {*} newCondition 
+ */
+export function change(newCondition) {
+    return {
+        type: actionTypes.change,
+        payload: newCondition
+    }
+}

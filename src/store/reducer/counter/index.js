@@ -1,16 +1,11 @@
-import { actionTypes } from '../../action/counter'
-const initialState = 10
-
-export default (state = initialState, { type, payload }) => {
+import { actionTypes } from "../../action/counter"
+export default function (state = 10, { type }) {
     switch (type) {
-
-    case actionTypes.increase:
-        return state + 1
-    
-    case actionTypes.decrease:
-        return state - 1
-
-    default:
-        return state
+        case actionTypes.increase:
+            return state + 1;
+        case actionTypes.decrease:
+            return state - 1;
+        default:
+            return state;
     }
 }

@@ -1,63 +1,94 @@
-import React, { useState, useEffect } from 'react'
-import StudentSearchBar from '../../components/ProjectAdmin/StudentSearchBar'
-import StudentTable from '../../components/ProjectAdmin/StudentTable'
-import qs from 'query-string'
-import Pager from '../../components/Pager'
-import { getSearchStud } from '../../fetch'
+import React from 'react'
+import StudentSearchBar from "../../components/StudentSearchBar"
+import StudentTable from "../../components/StudentTable"
+import { searchStudents } from "../../services/student"
+import { useState, useEffect } from "react"
+import qs from "query-string"
+import Pager from "../../components/common/Pager"
 
-function getQuery (search) {
-  const queryDefault = {
-    page: 1,
-    size: 10,
-    key: '',
-    sex: -1
-  }
-  const query = {...queryDefault, ...qs.parse(search)}
-  query.size = +query.size
-  query.page = +query.page
-  query.sex = +query.sex
-  return query
-} 
-
-function useGetResp (query) {
-  console.log(query)
-  const [stus, setStus] = useState({
-    cont: 0,
-    searchList: []
-  })
-  useEffect(() => {
-    (async() => {
-      const result = await getSearchStud({
-        search: query.key,
-        size: query.size,
-        sex: query.sex,
-        page: query.page
-      })
-      setStus(result)
-    })()
-  }, [query.key, query.size, query.sex, query.page])
-  return stus
+/**
+ * 该函数用于获取地址栏参数中提供的查询条件，返回一个对象
+ * 如果某些条件在地址中缺失，该函数会使用默认值
+ */
+function getQuery(search) {
+    const queryDefault = {
+        page: 1,
+        limit: 10,
+        key: "",
+        sex: -1
+    };
+    let query = qs.parse(search);
+    query = Object.assign({}, queryDefault, query);
+    query.limit = +query.limit;
+    query.page = +query.page;
+    query.sex = +query.sex;
+    return query;
 }
 
-function changeLocation (query, history) {
-  const newQuery = qs.stringify(query)
-  history.push(`?${newQuery}`)
+/**
+ * 获取服务器的响应结果
+ * @param query 查询条件对象
+ */
+function useResp(query) {
+    const [resp, setResp] = useState({
+        cont: 0,
+        datas: []
+    })
+    useEffect(() => {
+        searchStudents({
+            key: query.key,
+            limit: query.limit,
+            sex: query.sex,
+            page: query.page
+        }).then(r => {
+            setResp(r);
+        })
+    }, [query.key, query.limit, query.sex, query.page])
+    return resp;
+}
+
+function changeLocation(query, history) {
+    //根据条件对象，改变地址
+    const search = qs.stringify(query)
+    history.push("?" + search);
 }
 
 export default function StudentList(props) {
-  const query = getQuery(props.location.search)
-  const resp = useGetResp(query)
-  return (
-    <div>
-      <StudentSearchBar defaultValue={{ key: query.key, sex: query.sex, }} onSearch={e => {
-        const newQuery = { ...query, ...e, page: 1 }
-        changeLocation(newQuery, props.history)
-      }} ></StudentSearchBar>
-      <StudentTable stus={resp.searchList} />
-      <Pager current={query.page} limit={query.size} total={resp.cont} onPageChange={e => {
-        const newQuery = { ...query, page: e }
-        changeLocation(newQuery, props.history)
-      }} />
-    </div>
-  )
+    const query = getQuery(props.location.search)
+    const resp = useResp(query);
+    return (
+        <div>
+            <StudentSearchBar defaultValue={{
+                key: query.key,
+                sex: query.sex
+            }}
+                onSearch={cod => {
+                    const newQuery = {
+                        ...query,
+                        key: cod.key,
+                        sex: cod.sex,
+                        page: 1
+                    }
+                    changeLocation(newQuery, props.history);
+                }}
+            ></StudentSearchBar>
+            <StudentTable stus={resp.datas} />
+            <div>
+                <Pager
+                    current={query.page}
+                    total={resp.cont}
+                    limit={query.limit}
+                    panelNumber={5}
+                    onPageChange={newPage => {
+                        const newQuery = {
+                            ...query,
+                            page: newPage
+                        }
+                        changeLocation(newQuery, props.history);
+                    }}
+                />
+            </div>
+
+        </div>
+    )
 }
