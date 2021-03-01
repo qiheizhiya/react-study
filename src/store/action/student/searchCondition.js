@@ -1,5 +1,5 @@
 export const actionTypes = {
-    change: Symbol("change")
+    change: 'CHANGE'
 }
 /**
  * action creator创建函数

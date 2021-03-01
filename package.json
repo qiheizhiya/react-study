@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "animate.css": "^4.1.1",
+    "connected-react-router": "^6.8.0",
     "is-generator": "^1.0.3",
     "is-promise": "^4.0.0",
     "loadash": "^1.0.0",

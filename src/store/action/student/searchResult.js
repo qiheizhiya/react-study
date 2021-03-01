@@ -1,7 +1,7 @@
 export const actionTypes = {
-    setStudentsAndTotal: 'setStudentAndTotal',
-    setIsLoading: Symbol('setIsLoading'),
-    fetchStudents: Symbol('fetchStudents')
+    setStudentsAndTotal: 'SET_STUDENTS_AND_TOTAL',
+    setIsLoading: 'SET_IS_LOADING',
+    fetchStudents: 'FETCH_STUDENTS'
 }
 
 export const setStudentsAndTotal = (arr, total) => ({
